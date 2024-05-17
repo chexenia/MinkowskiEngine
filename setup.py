@@ -320,7 +320,7 @@ ext_modules = [
 setup(
     name="MinkowskiEngine",
     version=find_version("MinkowskiEngine", "__init__.py"),
-    install_requires=["torch", "numpy"],
+    #install_requires=["torch", "numpy"],
     packages=["MinkowskiEngine", "MinkowskiEngine.utils", "MinkowskiEngine.modules"],
     package_dir={"MinkowskiEngine": "./MinkowskiEngine"},
     ext_modules=ext_modules,
