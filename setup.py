@@ -69,7 +69,8 @@ if platform == "win32":
 elif platform == "darwin":
     # Set the distutils to use clang instead of g++ for valid std
     if "CC" not in os.environ:
-        os.environ["CC"] = "/usr/local/opt/llvm/bin/clang"
+        #os.environ["CC"] = "/usr/local/opt/llvm/bin/clang"
+        os.environ["CC"] = "/opt/homebrew/opt/llvm/bin/clang"
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -195,7 +196,8 @@ if not (BLAS is False):  # False only when not set, str otherwise
     if not (BLAS_INCLUDE_DIRS is False):
         include_dirs += BLAS_INCLUDE_DIRS
     if not (BLAS_LIBRARY_DIRS is False):
-        extra_link_args += [f"-Wl,-rpath,{BLAS_LIBRARY_DIRS}"]
+        #extra_link_args += [f"-Wl,-rpath,{BLAS_LIBRARY_DIRS}"]
+        extra_link_args += [f"-L{BLAS_LIBRARY_DIRS[0]}"]
 else:
     # find the default BLAS library
     import numpy.distutils.system_info as sysinfo
@@ -281,6 +283,7 @@ if "CC" in os.environ or "CXX" in os.environ:
         CC = os.environ["CXX"]
     else:
         CC = os.environ["CC"]
+        os.environ["CXX"] = CC
     print(f"Using {CC} for c++ compilation")
     if torch.__version__ < "1.7.0":
         NVCC_FLAGS += [f"-ccbin={CC}"]
@@ -313,6 +316,7 @@ ext_modules = [
         sources=[*[str(SRC_PATH / src_file) for src_file in SRC_FILES], *BIND_FILES],
         extra_compile_args={"cxx": CC_FLAGS, "nvcc": NVCC_FLAGS},
         libraries=libraries,
+        extra_link_args=extra_link_args,
     ),
 ]
 

@@ -394,3 +394,10 @@ Please feel free to update [the wiki page](https://github.com/NVIDIA/MinkowskiEn
 - Pattern Recognition: [High-Dimensional Convolutional Networks for Geometric Pattern Recognition, CVPR'20](https://arxiv.org/abs/2005.08144)
 - Detection: [Generative Sparse Detection Networks for 3D Single-shot Object Detection, ECCV'20](https://arxiv.org/abs/2006.12356)
 - Image matching: [Sparse Neighbourhood Consensus Networks, ECCV'20](https://www.di.ens.fr/willow/research/sparse-ncnet/)
+
+
+## Mac build
+```
+>> brew install openblas, llvm, openmp
+>> git checkout mac
+>> python setup.py install --blas=openblas --blas_include_dirs="/usr/local/opt/openblas/include" --blas_library_dirs="/usr/local/opt/openblas/lib"
